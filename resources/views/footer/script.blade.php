@@ -20,6 +20,7 @@
                     price: price,
                 },
                 success: function(res) {
+                    toastr.success('Product added successfully!');
                     // Assuming your modal has an ID like #myModal
                     $('#addModal').modal('hide');
                     $('.modal-backdrop').remove(); // Remove dark background
@@ -31,6 +32,9 @@
                     // Optionally reload or update your table without refresh
                     // location.reload(); // Simple: reload page to see updated data
 
+                },
+                error: function(xhr) {
+                    toastr.error('Something went wrong.');
                 }
             });
         });
@@ -64,6 +68,7 @@
                     price: price,
                 },
                 success: function(res) {
+                    toastr.success('Product Updated successfully!');
                     $('#editModal').modal('hide'); // Hide the modal
                     $('.modal-backdrop').remove(); // Remove dark background
                     $('body').removeClass('modal-open'); // Allow scrolling again
@@ -75,6 +80,7 @@
                     // location.reload(); // Simple: reload page to see updated data
                 },
                 error: function(xhr, status, error) {
+                    toastr.error('Something went wrong.');
                     console.log(xhr.responseText); // Print any errors
                 }
             });
@@ -92,8 +98,12 @@
                     },
                     success: function(res) {
                         if (res.status==='success'){
+                            toastr.success('Product Deleted successfully!');
                             $('.table').load(location.href+' .table');
                         }
+                    },
+                    error: function(xhr, status, error) {
+                        toastr.error('Something went wrong.');
                     }
                 });
             }
